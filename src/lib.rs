@@ -831,8 +831,18 @@ fn open_ontology_rdf(ontology: &str) ->
     };
     r
 }
-
+/// Loads an owl 2 ontology.
+/// Supported formats: rdf, owl/xml
+/// Args:
+///     ontology (str): path to the ontology file or string containing the ontology itself.
+/// Returns:
+///     ont (PyIndexedOntology): ontology object
+/// Examples:
+///     >>> open_ontology("some_ontology.owx")
+///     >>> open_ontology("some_ontology.rdf")
+///     >>> open_ontology("<?xml version="1.0"?>\n<Ontology xmlns...")
 #[pyfunction]
+#[pyo3(text_signature = "(ontology)")]
 fn open_ontology(ontology: &PyString) -> PyResult<PyIndexedOntology> {
     let before = Instant::now();
 
